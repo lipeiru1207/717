@@ -65,21 +65,7 @@ module.exports=function(app){
     let { username, password } = req.body;
     let loginPath=path.resolve(__dirname+'/user');
     let login=JSON.parse(fs.readFileSync(loginPath+'/user.json','utf-8'));
-    // let add=[];
-    // login.forEach((item,index)=>{
-    //   if(item.userename==username&&item.password==username){
-    //     console.log(item)
-    //     console.log(111)
-    //   }
-    // })
     if(login.some(item=>{
-      // if(req.body.username==item.username){
-      //   if(req.body.password==item.password){
-      //     return req.body.username
-      //   }
-      //   return req.body.username
-      // }
-      // return req.body.username
       return username==item.username && password==item.password;
     })){
       let token=jwt.sign(req.body,'1601E',{
@@ -216,5 +202,26 @@ module.exports=function(app){
     })
     // console.log(req.body.item)
   });
+  //删除购物车
+  app.post('/api/shopcar/delate',(req,res)=>{
+    if(!req.body.token){
+      res.json({
+        msg:"token缺失",
+        code:2
+      })
+    }
+    jwt.verify(req.body.token,'1601E',(err,decoded)=>{
+      if(err){
+        res.json({
+          msg:'登录超时,重新登录'
+        })
+      }else{
+        let carpath = path.resolve(__dirname,'carlist/carlist.json');
+        let carlist = JSON.parse(fs.readFileSync(carpath,'utf-8'));
+        console.log(carlist[decoded.username]);
+        res.end('111')
+      }
+    })
+  })
 }
 

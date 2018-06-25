@@ -1,7 +1,7 @@
 <template>
     <div class='shopcarItem'>
       <span class='uncheck' :class='checkClass' @click='flag=!flag'></span>
-      <dl>
+      <dl @click='orders'>
           <dt>
               <img v-lazy="data.imageurl">
           </dt>
@@ -54,6 +54,9 @@ export default {
       })
     },
     methods: {
+        orders(){
+          this.$router.push('/order')
+        },
         addClick() {
           console.log(this.data)
             let count=this.data.count;

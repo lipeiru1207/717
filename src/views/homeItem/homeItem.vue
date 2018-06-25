@@ -7,6 +7,7 @@
       <span class='home-name'>{{data.wname}}</span>
       <span >{{data.jdPrice}}</span>
       <i @click.stop='shopCar' class='icon iconfont'>&#xe63c;</i>
+      <Toast ref='toa'></Toast>
     </dd>
   </dl>
 </template>
@@ -36,7 +37,7 @@ export default {
         item:this.data
       }).then(res=>{
           if(res.code==1){
-            console.log('添加成功')
+            this.$refs.toa.active('添加成功')
           }else{
             this.$router.push({
               name:"login",

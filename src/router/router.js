@@ -10,6 +10,12 @@ import Search from '../views/search/search'
 import Login from '../views/login/login'
 import Register from '../views/register/register'
 import {getCookie} from '../utils/cookie'
+import Order from '../views/order/order'
+import All from '../views/order/all/all'
+import Pendpayment from '../views/order/pendpayment/pendpayment'
+import Delivered from '../views/order/delivered/delivered'
+import Receivegoods from '../views/order/receivegoods/receivegoods'
+import Aftersales from '../views/order/aftersales/aftersales'
 Vue.use(VueRouter)
 let router = new VueRouter({
   routes:[
@@ -68,6 +74,39 @@ let router = new VueRouter({
       name:'register',
       path:'/register',
       component:Register
+    },
+    {
+      name:'order',
+      path:'/order',
+      component:Order,
+      redirect:'/order/all',
+      children:[
+        {
+          name:'all',
+          path:'all',
+          component:All
+        },
+        {
+          name:'pendpayment',
+          path:'pendpayment',
+          component:Pendpayment
+        },
+        {
+          name:'delivered',
+          path:'delivered',
+          component:Delivered
+        },
+        {
+          name:'receivegoods',
+          path:'receivegoods',
+          component:Receivegoods
+        },
+        {
+          name:'aftersales',
+          path:'aftersales',
+          component:Aftersales
+        }
+      ]
     }
   ]
 })
@@ -75,7 +114,7 @@ export default router
 router.beforeEach((to,from,next)=>{
   if(to.name==='my' || to.name ==='shopcart'){
     let token=getCookie('token');
-    console.log(token);
+    // console.log(token);
     if(!token){
       next({
         name:"login",
@@ -87,5 +126,5 @@ router.beforeEach((to,from,next)=>{
   }else{
     next()
   }
-  console.log(to)
+  // console.log(to)
 })

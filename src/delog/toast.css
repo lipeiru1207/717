@@ -1,0 +1,20 @@
+.toast{
+    width: 40%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%,-50%,0);
+    text-align: center;
+}
+.toast-enter,.toast-leave-to{
+    opacity: 0;
+}
+.toast-enter-to,.toast-leave{
+    opacity: 1;
+}
+.toast-enter-active,.toast-leave-active{
+    transition: all 0.3s linear;
+}
+.toast-move {  
+    transition: all 0.3s;  
+}  

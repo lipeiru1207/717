@@ -25,6 +25,7 @@
       <b>合计:{{total}}</b>
       <p class='shopcart-p' @click='clearing'>{{type}}</p>
     </div>
+    <Toast ref='toa'></Toast>
   </div>
 </template>
 
@@ -94,6 +95,7 @@ export default {
       if(this.edit=='编辑'){
         this.type='删除';
         this.edit='完成'
+        this.$refs.toa.active('删除')
       }else{
         this.type='结算';
         this.edit='编辑'
@@ -103,7 +105,11 @@ export default {
       if(this.type=='结算'){
         //跳页面
       }else{
-
+        this.$http.post('/api/shopcar/delate',{
+          token:getCookie('token')
+        }).then(res=>{
+            console.log(res)
+        })
       }
     }
   },
