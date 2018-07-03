@@ -16,6 +16,9 @@ import Pendpayment from '../views/order/pendpayment/pendpayment'
 import Delivered from '../views/order/delivered/delivered'
 import Receivegoods from '../views/order/receivegoods/receivegoods'
 import Aftersales from '../views/order/aftersales/aftersales'
+import Address from '../views/my/address/address'
+import Recipient from '../views/my/address/recipient/recipient'
+import Signout from '../views/my/signout/signout'
 Vue.use(VueRouter)
 let router = new VueRouter({
   routes:[
@@ -107,10 +110,26 @@ let router = new VueRouter({
           component:Aftersales
         }
       ]
+    },
+    {
+      name:'address',
+      path:"/address",
+      component:Address
+    },
+    {
+      name:'recipient',
+      path:'/recipient',
+      component:Recipient
+    },
+    {
+      name:'signout',
+      path:'/signout',
+      component:Signout
     }
   ]
 })
 export default router
+//全局守卫
 router.beforeEach((to,from,next)=>{
   if(to.name==='my' || to.name ==='shopcart'){
     let token=getCookie('token');

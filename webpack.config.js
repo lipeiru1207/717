@@ -41,11 +41,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      'swiper': 'swiper/dist/js/swiper.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
+    host:'192.168.43.168',
     historyApiFallback: true,
     noInfo: true,
     overlay: true
@@ -55,11 +57,11 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins:[
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: '"development"'
-      }
-    })
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: '"development"'
+    //   }
+    // })
   ]
 }
 

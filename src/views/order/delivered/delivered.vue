@@ -1,6 +1,6 @@
 <template>
   <div>
-    代发货
+    待发货
   </div>
 </template>
 

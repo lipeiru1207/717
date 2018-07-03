@@ -36,6 +36,22 @@
         <i class='icon iconfont'>&#xe62b;</i>
         <span>茶果冲饮</span>
       </p>
+      <p>
+        <i class='icon iconfont'>&#xe62b;</i>
+        <span>家乡味道</span>
+      </p>
+      <p>
+        <i class='icon iconfont'>&#xe62b;</i>
+        <span>进口食品</span>
+      </p>
+      <p>
+        <i class='icon iconfont'>&#xe62b;</i>
+        <span>牛奶乳品</span>
+      </p>
+      <p>
+        <i class='icon iconfont'>&#xe62b;</i>
+        <span>茶果冲饮</span>
+      </p>
     </div>
     <div class='home' ref='home'>
       <homeItem v-for='(item,index) in list' :key='index' :data='item' ></homeItem>
@@ -72,7 +88,7 @@ export default {
     //   this.list=res.data.list;
     //   console.log(this.list)
     // })
-    this.$http(`http://localhost:3000/index/recommend.action?page=${this.page}`).then(res=>{
+    this.$http(`/index/recommend.action?page=${this.page}`).then(res=>{
       this.list=JSON.parse(JSON.parse(res).recommend).wareInfoList;
       // console.log(this.list)
     })
@@ -90,7 +106,7 @@ export default {
           this.load='你知道的太多了';
           return ;
         }
-        this.$http(`http://localhost:3000/index/recommend.action?page=${this.page}`).then(res=>{
+        this.$http(`/index/recommend.action?page=${this.page}`).then(res=>{
           if(res.code===1000){
             this.load='你知道的太多了';
           }else{

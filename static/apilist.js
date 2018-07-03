@@ -1,6 +1,22 @@
 let fs=require('fs');
 let path=require('path');
 let jwt=require('jsonwebtoken');
+let multer=require('multer');
+// let upload=multer({
+//   dest:path.resolve(__dirname,'imgs')
+// })
+
+let storage=multer.diskStorage({
+  destination:function(req,file,cb){
+    cb(null,path.resolve(__dirname,'imgs'))
+  },
+  filename:function(req,file,cb){
+    let o=file.originalname.split('.');
+    cb(null,o[0]+'-'+Date.now()+'.'+o[1])
+  }
+})
+let upload=multer({storage:storage})
+
 //定义接口
 module.exports=function(app){
   let paths=path.resolve(__dirname+'/data')
@@ -218,9 +234,108 @@ module.exports=function(app){
       }else{
         let carpath = path.resolve(__dirname,'carlist/carlist.json');
         let carlist = JSON.parse(fs.readFileSync(carpath,'utf-8'));
-        console.log(carlist[decoded.username]);
+        // console.log(carlist[decoded.username]);
         res.end('111')
       }
+    })
+  })
+
+  //添加收件人
+  app.post('/api/addrecip',(req,res)=>{
+      // console.log(req.body)  点击后获取的数据
+      let addreciplist=JSON.parse(fs.readFileSync(path.resolve(__dirname,'addrecip/addrecip.json'),'utf-8'))
+      jwt.verify(req.body.token,'1601E',(err,decoded)=>{
+        if(err){
+          res.json({
+            code:0,
+            msg:"登录超时,请重新登录"
+          })
+        }else{
+         //console.log(addreciplist[decoded.username])
+        //  console.log(req.body.data)
+          if(addreciplist[decoded.username]){  //判断数据是否存在存在就push进去不存在就添加
+            addreciplist[decoded.username].push(req.body.data)
+          }else{
+            addreciplist[decoded.username]=[req.body.data]
+          }
+          fs.writeFile(path.resolve(__dirname,'addrecip/addrecip.json'),JSON.stringify(addreciplist),function(err){
+            if(err){
+              res.json({
+                code:0,
+                msg:'登录超时,请重新登录'
+              })
+            }else{
+              res.json({
+                code:1,
+                msg:'添加成功',
+                data:addreciplist[decoded.username] || []
+              })
+            }
+          })
+        }
+      })
+
+  })
+  app.post('/api/addrecips',(req,res)=>{
+    jwt.verify(req.body.token,'1601E',(err,decoded)=>{
+      if(err){
+        res.json({
+          msg:'登录超时,请重新登录',
+          code:0
+        })
+        return;
+      }else{
+        let addrecipsList=JSON.parse(fs.readFileSync(path.resolve(__dirname,'addrecip/addrecip.json'),'utf-8'));
+        console.log(addrecipsList[decoded.username])
+        res.json({
+          msg:'成功',
+          code:1,
+          data:addrecipsList[decoded.username] || []
+        })
+      }
+    })
+  })
+
+  //删除地址
+  app.post('/api/addDelete',(req,res)=>{
+    let addlist=JSON.parse(fs.readFileSync(path.resolve(__dirname,'addrecip/addrecip.json'),'utf-8'));
+    let arr=[];
+    arr.push(addlist)
+    jwt.verify(req.body.token,'1601E',(err,decoded)=>{
+        if(err){
+          res.json({
+            code:0,
+            msg:'失败'
+          })
+        }else{
+          let newArr=[]
+          arr.map((item,index)=>{
+            item[decoded.username].map((val,ind)=>{
+              if(val.name!=req.body.data.name){
+                console.log(val)
+                newArr.push(val)
+              }
+            })
+            console.log(newArr)
+           item[decoded.username]=newArr;
+          })
+          fs.writeFile(path.resolve(__dirname,'addrecip/addrecip.json'),JSON.stringify(addlist),(err)=>{
+           //console.log(err)
+            res.json({
+              code:1,
+              msg:"success"
+            })
+          })
+        }
+    })
+  })
+  //上传图片/文件/视频
+  app.post('/api/upload',upload.single('img'),(req,res)=>{
+    // console.log(req.file)
+    res.json({
+      code:0,
+      msg:'success',
+      url:'/static/imgs/'+req.file.filename
     })
   })
 }

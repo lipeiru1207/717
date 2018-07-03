@@ -8,7 +8,8 @@ let store=new Vuex.Store({
   state:{
     data:{},
     data1:{},
-    shopItem:[]
+    shopItem:[],
+    addrecip:[]
   },
   mutations:{
     updataData(state,payload){
@@ -22,12 +23,16 @@ let store=new Vuex.Store({
     },
     updateShopItem(state,payload){
       state.shopItem=payload;
+    },
+    updataAddrecip(state,payload){
+      state.addrecip=payload
+      // console.log(state.addrecip)
     }
   },
   actions:{
     fetchData({state,commit},cid){
       if(!state.data[cid]){
-        instance.get(`http://localhost:3000/api/classify?cid=${cid}`).then(res=>{
+        instance.get(`/api/classify?cid=${cid}`).then(res=>{
           // this.con=res.secondLevelCategories;
           commit('updataData',{
             id:cid,

@@ -1,5 +1,5 @@
 .toast{
-    width: 40%;
+    width: 70%;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -15,6 +15,6 @@
 .toast-enter-active,.toast-leave-active{
     transition: all 0.3s linear;
 }
-.toast-move {  
-    transition: all 0.3s;  
-}  
+.toast-move {
+    transition: all 0.3s;
+}

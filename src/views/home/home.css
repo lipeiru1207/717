@@ -49,3 +49,19 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.home-icon{
+  width:100%;
+  display:flex;
+  flex-wrap:wrap;
+}
+.home-icon>p{
+  width:25%;
+  height:1.4rem;
+  display:flex;
+  flex-direction: column;
+  text-align:center;
+}
+.home-icon>p>i{
+  width:.6rem;
+  height:.6rem;
+}

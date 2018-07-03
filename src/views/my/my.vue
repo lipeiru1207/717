@@ -2,7 +2,7 @@
     <div class="warp">
         <div>
             <header class="header">
-                <i class="icon iconfont icon-shezhi"></i>
+                <i @click='settings' class="icon iconfont icon-shezhi"></i>
                 <span>我的717商城</span>
                 <i class="icon iconfont icon-xiaoxi"></i>
             </header>
@@ -19,26 +19,36 @@
                 </span>
                 <i class="icon iconfont icon-youjiantou-01"></i>
             </div>
-            <ul class="order">
-                <router-link to="" tag="li">
-                    <i class="icon iconfont icon-qiaquan"></i>
-                    <span>待付款</span>
+            <ul class="orders">
+                <router-link to="/order/pendpayment" tag="li">
+                    <p>
+                      <i class="icon iconfont icon-qiaquan"></i>
+                      <span>待付款</span>
+                    </p>
                 </router-link>
-                <router-link to="" tag="li">
-                    <i class="icon iconfont icon-daishouhuo-01"></i>
-                    <span>待收货</span>
+                <router-link to="/order/receivegoods" tag="li">
+                    <p>
+                      <i class="icon iconfont icon-daishouhuo-01"></i>
+                      <span>待收货</span>
+                    </p>
                 </router-link>
-                <router-link to="" tag="li">
-                    <i class="icon iconfont icon-faxiandingdan"></i>
-                    <span>代发货</span>
+                <router-link to="/order/delivered" tag="li">
+                    <p>
+                      <i class="icon iconfont icon-faxiandingdan"></i>
+                      <span>代发货</span>
+                    </p>
                 </router-link>
-                <router-link to="" tag="li">
-                    <i class="icon iconfont icon-kefu"></i>
-                    <span>售后</span>
+                <router-link to="/order/aftersales" tag="li">
+                    <p>
+                      <i class="icon iconfont icon-kefu"></i>
+                      <span>售后</span>
+                    </p>
                 </router-link>
-                <router-link to="" tag="li">
-                    <i class="icon iconfont icon-wodedingdan"></i>
-                    <span @click.stop='orders'>我的订单</span>
+                <router-link to="/order/all" tag="li">
+                    <p>
+                      <i class="icon iconfont icon-wodedingdan"></i>
+                      <span>我的订单</span>
+                    </p>
                 </router-link>
             </ul>
             <ul class="list">
@@ -49,7 +59,7 @@
                     </p>
                     <i class="icon iconfont icon-webicon213"></i>
                 </router-link>
-                <router-link to="" tag="li">
+                <router-link to="/address" tag="li">
                     <p>
                         <i class="icon iconfont icon-dizhi-01"></i>
                         <span>地址管理</span>
@@ -92,8 +102,8 @@ export default {
         });
     },
     methods:{
-      orders(){
-        this.$router.push('/order/all')
+      settings(){
+        this.$router.push('/signout')
       }
     }
 }
@@ -134,24 +144,26 @@ export default {
     font-size: 55px;
 }
 
-.order {
-    display: flex;
-    justify-content: space-around;
-    height: 60px;
-    padding: .3rem 0;
+.orders {
+    width:100%;
+    height:1.2rem;
     border-top:1px solid #ccc;
-}
-
-.order li {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 30px;
 }
 
-.order li i.icon {
-    font-size: 25px;
+.orders>li {
+    flex:1;
+    display: flex;
+    align-items: center;
 }
+.orders>li>p{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction: column;
+  text-align:center;
+}
+
 .list{
     padding:  .3rem 0;
     border-top:.3rem solid #ccc;

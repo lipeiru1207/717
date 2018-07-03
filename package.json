@@ -6,8 +6,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --host 169.254.246.79",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "clear": "rm -rf build&& mkdir build",
+    "start": "npm run clear&& NODE_ENV=development webpack-dev-server --host 0.0.0.0 --devtool eval --progress --color --profile",
+    "deploy": "npm run pre&& npm run clear&& NODE_ENV=production webpack -p --progress"
   },
   "dependencies": {
     "vue": "^2.5.11"
@@ -27,6 +30,7 @@
     "file-loader": "^1.1.4",
     "swiper": "^4.3.3",
     "vue-loader": "^13.0.5",
+    "vue-multiselect": "^2.1.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.4.4",
     "vuex": "^3.0.1",

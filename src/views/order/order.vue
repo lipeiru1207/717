@@ -80,6 +80,9 @@ section .nav a{
   color:black;
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
+section .nav a.router-link-active{
+  border-bottom:1px solid red;
+}
 section .order-sec{
   flex: 1;
   overflow-y:scroll;

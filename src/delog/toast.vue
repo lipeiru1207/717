@@ -11,7 +11,8 @@ export default {
   data() {
     return {
       isActive: false,
-      _timeout: 2000
+      _timeout: 2000,
+      autoclose:false
     };
   },
   props: {
@@ -39,5 +40,8 @@ export default {
   line-height: 0.9rem;
   padding: 0 0.3rem;
   margin: 5px;
+  white-space:nowrap;
+  /* overflow:hidden; */
+  /* text-overflow:ellipsis; */
 }
 </style>

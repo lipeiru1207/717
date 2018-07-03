@@ -123,21 +123,24 @@ export default {
 .shopcart{
   width:100%;
   height:100%;
-  position:relative;
+  display:flex;
+  flex-direction: column;
+  overflow: hidden;
+
 }
 .shopcart-header{
+  flex-shrink: 0;
   width:100%;
   height:8%;
   display:flex;
   align-items: center;
   justify-content: space-between;
 }
+/* jiesuan */
 .shopcar-footer{
+  flex-shrink: 0;
   width:100%;
   height:9%;
-  position:absolute;
-  bottom:0;
-  left:0;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -154,14 +157,14 @@ export default {
 }
  .sec {
     width: 100%;
-    height: 80%;
-    overflow:hidden;
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: scroll;
 }
 
 ul {
     width: 100%;
     height: 100%;
-    overflow-y:scroll;
 }
 
 ul li {

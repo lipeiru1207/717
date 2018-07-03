@@ -7,7 +7,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 app.all('*',function(req,res,next){
   res.header({
-    'Access-Control-Allow-Origin':"http://localhost:8080", //可以是* 代表全部  这是cors
+    'Access-Control-Allow-Origin':"*", //可以是* 代表全部  这是cors
     "Accept-Content":"application/json,plain/text",
     'Access-Control-Allow-Headers': 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild'
   })
